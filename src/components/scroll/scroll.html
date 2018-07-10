@@ -1,0 +1,10 @@
+<!-- Generated template for the ScrollComponent component -->
+<div #scrollContainer class="scroll-container" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)">
+  <div #scroll class="scroll">
+    <div #box class="box">
+      <div #content class="content">
+      </div>
+    </div>
+  </div>
+  <ng-content></ng-content>
+</div>
