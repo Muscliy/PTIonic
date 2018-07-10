@@ -10,15 +10,23 @@ import { MediaStorageService } from '../../model/media-stroage.service';
 export class HomePage {
 
   constructor(public navCtrl: NavController, private contactStorage: ContactStorageService, private mediaStorage: MediaStorageService ) {
-    let contact: Contact = {
+    let contacts: Contact[] = [{
       firstname: 'Jack',
       lastname: 'Johnson',
       emails: [
         'jj@gmail.com',
         'jackjohnson@yahoo.cn'
       ],
-      phones: []
-    }
+      phone: '13888888101'
+    },{
+      firstname: 'Lucy',
+      lastname: 'Will',
+      emails: [
+        'jj@gmail.com',
+        'jackjohnson@yahoo.cn'
+      ],
+      phone: '13888888102'
+    }]
 
     let medias = [{
       hash: 'dshskldjlka',
@@ -31,7 +39,7 @@ export class HomePage {
     }]
 
     setTimeout(() => {
-      this.contactStorage.addContact(contact);
+      this.contactStorage.addContacts(contacts);
       this.mediaStorage.addMedias(medias);
     }, 1000);
   }

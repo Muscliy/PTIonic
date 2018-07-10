@@ -1,41 +1,47 @@
-import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { Injectable } from "@angular/core";
+import { Storage } from "@ionic/storage";
 
-export interface Contact  {
+export interface Contact {
   firstname: String;
   lastname: String;
   emails: Array<String>;
-  phones: Array<String>;
+  phone: String;
 }
 
 @Injectable()
 export class ContactStorageService {
   private manager: Storage;
-  private contacts: Array<Contact> = [];
+  private contactMap: any = {};
 
   constructor() {
     this.initStorage();
   }
 
   initStorage() {
-    const name = localStorage.getItem('_dbname');
+    const name = localStorage.getItem("_dbname");
     this.manager = new Storage({
       name: name || "default",
-      storeName: '_contacts',
-      driverOrder: ['indexeddb', 'websql', 'localstorage']
+      storeName: "_contacts",
+      driverOrder: ["indexeddb", "websql", "localstorage"]
     });
 
-    this.manager.get("contacts").then((result) => {
-      this.contacts = result ? <Array<Contact>> result : [];
-      console.log("Contacts found: ", this.contacts);
-    }, (error) => {
-      console.log("ERROR: ", error);
+    this.manager.forEach((value, key, index) => {
+      this.contactMap[key] = value;
     });
   }
 
-  addContact(contact: Contact) {
-    this.contacts.push(contact);
-    this.manager.set("contacts", this.contacts);
+  addContact(contact) {
+    this.manager.set(contact.phone, contact);
+    this.contactMap[contact.phone] = contact;
   }
 
+  getAllContacts() {
+    return this.contactMap.values();
+  }
+
+  addContacts(contacts) {
+    contacts.forEach(element => {
+      this.addContact(element);
+    });
+  }
 }

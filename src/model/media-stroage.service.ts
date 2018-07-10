@@ -13,7 +13,7 @@ export interface Media {
 @Injectable()
 export class MediaStorageService {
   private manager: Storage;
-  private mediaMap: Array<Media> = [];
+  private mediaMap: any = {};
 
   constructor() {
     this.initStorage()

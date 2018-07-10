@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { Injectable } from "@angular/core";
+import { Storage } from "@ionic/storage";
 
 @Injectable()
 export class CommonStorageService {
@@ -10,10 +10,10 @@ export class CommonStorageService {
   }
 
   initStorage() {
-    const name = localStorage.getItem('_dbname');
+    const name = localStorage.getItem("_dbname");
     this.manager = new Storage({
-      name:"default",
-      driverOrder: ['localstorage']
+      name: "default",
+      driverOrder: ["localstorage"]
     });
   }
 }
